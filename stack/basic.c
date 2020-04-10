@@ -19,4 +19,5 @@ int main()
 {
     push(20);
     printf("%d", top->data);
+    return 0;
 }
