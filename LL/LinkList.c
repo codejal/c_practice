@@ -14,10 +14,9 @@ void create(int array[], int size)
     int i;
     struct node *last;
     struct node *temp;
-    temp = (struct node *)malloc(sizeof(struct node));
-    temp->data = array[0];
-    temp->next = NULL;
-    first = temp;
+    first = (struct node *)malloc(sizeof(struct node));
+    first->data = array[0];
+    first->next = NULL;
     last = first;
     for (i = 1; i < size; i++)
     {
