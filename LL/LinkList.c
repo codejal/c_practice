@@ -35,7 +35,7 @@ void display()
     t = first;
     for (i = 0; i < 6; i++)
     {
-        printf("%d", t->data);
+        printf("%d ", t->data);
         t = t->next;
     }
 }
