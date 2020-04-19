@@ -26,7 +26,7 @@ void create(int array[], int size)
         last->next = temp;
         last = temp;
     }
-}
+};
 
 void display()
 {
@@ -38,11 +38,30 @@ void display()
         printf("%d ", t->data);
         t = t->next;
     }
-}
+};
+
+void reverse()
+{
+    struct node *p = NULL, *q = NULL, *r = NULL;
+    p = first;
+
+    while (p != NULL)
+    {
+        r = q;
+        q = p;
+        p = p->next;
+        q->next = r;
+    };
+    first = q;
+};
 
 int main()
 {
     int array[6] = {1, 2, 3, 4, 5, 6};
     create(array, 6);
     display();
+    reverse();
+    printf("\n");
+    display();
+    printf("\n");
 }
