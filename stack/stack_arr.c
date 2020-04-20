@@ -3,7 +3,7 @@
 
 int main()
 {
-    int choice = 1, max;
+    int choice, max;
     scanf("%d", &max);
     int array[max];
     printf("Select choice");
