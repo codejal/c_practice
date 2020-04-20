@@ -83,7 +83,7 @@ int main()
         printf("3) peek     3  \n");
         printf("4) display  4  \n");
         printf("5) Exit     5  \n");
-        printf("     ");
+        printf("      ");
         scanf("%d", &choice);
     }
     printf("\nGOODBYE\n\n");
