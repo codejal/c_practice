@@ -48,10 +48,10 @@ int main(void)
         }
         if (term1P->power == term2P->power)
         {
-            if (term1P->coeff + term2P->coeff != 0)
+            if (term1P->coeff - term2P->coeff != 0)
                 insertTerm(&result,
 
-                           term1P->coeff + term2P->coeff, term2P->power);
+                           term1P->coeff - term2P->coeff, term2P->power);
 
             term2P = getNextTerm(&expr2, term2P);
             term1P = getNextTerm(&expr1, term1P);
@@ -65,7 +65,7 @@ int main(void)
         }
         if (term1P->power < term2P->power)
         {
-            insertTerm(&result, term2P->coeff, term2P->power);
+            insertTerm(&result, (-1) * term2P->coeff, term2P->power);
             term2P = getNextTerm(&expr2, term2P);
             continue;
         }
