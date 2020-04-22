@@ -5,7 +5,6 @@
 struct term *getFirstTerm(expression *ptrToExpr)
 {
     assert(ptrToExpr != NULL);
-    assert(*ptrToExpr != NULL);
     return (*ptrToExpr)->nextP;
 }
 /* Initialise a expression with no term */
@@ -57,4 +56,8 @@ void printExpr(expression *ptrToExpr)
         prnt = getNextTerm(ptrToExpr, prnt);
     }
     printf("\n");
+}
+void copy(expression *ptrToExpr1, expression *ptrToExpr2)
+{
+    ptrToExpr2 = ptrToExpr1;
 }
