@@ -3,7 +3,9 @@
 #include "expr.h"
 expression expr1;
 expression expr2;
-expression result;
+expression result_add;
+expression result_sub;
+
 struct term *term1P, *term2P;
 
 int main(void)
@@ -19,39 +21,32 @@ int main(void)
 
     /* Construct expression 2 */
     createExpr(&expr2); // Get the start pointer set
-    insertTerm(&expr2, 10, 1000);
-    insertTerm(&expr2, 200, 3000);
-    insertTerm(&expr2, 110, 500);
-    insertTerm(&expr2, 1000, 0);
-    insertTerm(&expr2, 10, -1000);
+    expr2 = expr1;
     printf("Expression_2 = ");
     printExpr(&expr2);
 
     /* Construct result = expr1 + expr2 */
-    createExpr(&result);
+    createExpr(&result_add);
     term1P = getFirstTerm(&expr1);
     term2P = getFirstTerm(&expr2);
-
     while (term1P != NULL || term2P != NULL)
     {
         if (term1P == NULL)
         {
-            insertTerm(&result, term2P->coeff, term2P->power);
+            insertTerm(&result_add, term2P->coeff, term2P->power);
             term2P = getNextTerm(&expr2, term2P);
             continue;
         }
         if (term2P == NULL)
         {
-            insertTerm(&result, term1P->coeff, term1P->power);
+            insertTerm(&result_add, term1P->coeff, term1P->power);
             term1P = getNextTerm(&expr1, term1P);
             continue;
         }
         if (term1P->power == term2P->power)
         {
             if (term1P->coeff + term2P->coeff != 0)
-                insertTerm(&result,
-
-                           term1P->coeff + term2P->coeff, term2P->power);
+                insertTerm(&result_add, term1P->coeff + term2P->coeff, term2P->power);
 
             term2P = getNextTerm(&expr2, term2P);
             term1P = getNextTerm(&expr1, term1P);
@@ -59,19 +54,63 @@ int main(void)
         }
         if (term1P->power > term2P->power)
         {
-            insertTerm(&result, term1P->coeff, term1P->power);
+            insertTerm(&result_add, term1P->coeff, term1P->power);
             term1P = getNextTerm(&expr1, term1P);
             continue;
         }
         if (term1P->power < term2P->power)
         {
-            insertTerm(&result, term2P->coeff, term2P->power);
+            insertTerm(&result_add, term2P->coeff, term2P->power);
             term2P = getNextTerm(&expr2, term2P);
             continue;
         }
     }
-
     printf("Expression_1 + Expression_2 = ");
-    printExpr(&result);
+    printExpr(&result_add);
+    expr2 = expr1;
+    createExpr(&result_sub);
+    term1P = getFirstTerm(&expr1);
+    term2P = getFirstTerm(&expr2);
+    while (term1P != NULL || term2P != NULL)
+    {
+        if (term1P == NULL)
+        {
+            insertTerm(&result_sub, (-1) * term2P->coeff, term2P->power);
+            term2P = getNextTerm(&expr2, term2P);
+            continue;
+        }
+        else if (term2P == NULL)
+        {
+            insertTerm(&result_sub, term1P->coeff, term1P->power);
+            term1P = getNextTerm(&expr1, term1P);
+            continue;
+        }
+        else if (term1P->power == term2P->power)
+        {
+            if (term1P->coeff - term2P->coeff != 0)
+                insertTerm(&result_sub, term1P->coeff - term2P->coeff, term2P->power);
+
+            term2P = getNextTerm(&expr2, term2P);
+            term1P = getNextTerm(&expr1, term1P);
+            continue;
+        }
+        else if (term1P->power > term2P->power)
+        {
+            insertTerm(&result_sub, term1P->coeff, term1P->power);
+            term1P = getNextTerm(&expr1, term1P);
+            continue;
+        }
+        else if (term1P->power < term2P->power)
+        {
+            insertTerm(&result_sub, (-1) * term2P->coeff, term2P->power);
+            term2P = getNextTerm(&expr2, term2P);
+            continue;
+        }
+        else
+            result_sub = 0;
+    }
+    printf("Expression_1 - Expression_2 = 0");
+    printExpr(&result_sub);
+
     return 0;
 }
