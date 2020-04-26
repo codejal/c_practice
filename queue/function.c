@@ -4,7 +4,7 @@ int queue[10];
 void push(void)
 {
     int x;
-    printf("enter nuymber to push = ");
+    printf("enter number to push = ");
     scanf("%d", &x);
     printf("\n");
     last++;
@@ -13,7 +13,7 @@ void push(void)
 
 int pop(void)
 {
-    printf(" Popwd element= %d\n", queue[last]);
+    printf(" Poped element= %d\n", queue[last]);
     last = last - 1;
     return queue[last];
 }
