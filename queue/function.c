@@ -1,3 +1,4 @@
+#include "function.h"
 int top = 0, last = -1;
 int queue[10];
 void push(void)
